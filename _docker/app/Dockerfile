@@ -11,7 +11,15 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     nano \
-    bash
+    bash \
+    libpng-dev \
+    libonig-dev \
+    libwebp-dev \
+    libxml2-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    zip \
+    unzip 
     
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
