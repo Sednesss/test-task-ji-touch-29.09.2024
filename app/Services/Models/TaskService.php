@@ -3,11 +3,13 @@
 namespace App\Services\Models;
 
 use App\DTO\Models\TaskDTO;
+use App\Exceptions\Models\Task\TaskAlreadyExistsException;
 use App\Exceptions\Models\Task\TaskNotFoundException;
 use App\Exceptions\Models\User\UserNotFoundException;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Ramsey\Uuid\Uuid;
 
 class TaskService
 {
@@ -38,7 +40,7 @@ class TaskService
      * @throws UserNotFoundException
      * @return Collection|Task[]
      */
-    public function list(?int $userId): Collection
+    public function list(?string $userId = null): Collection
     {
         if ($userId) {
             $user = $this->userService->find($userId);
@@ -52,10 +54,16 @@ class TaskService
     }
 
     /**
+     * @throws TaskAlreadyExistsException
      * @throws UserNotFoundException
      */
     public function create(TaskDTO $taskDTO): Task
     {
+        $idAsBinary = Uuid::fromString($taskDTO->id)->getBytes();
+        if ($this->model->where('id', $idAsBinary)->count() > 0) {
+            throw new TaskAlreadyExistsException();
+        }
+
         $this->userService->find($taskDTO->user_id);
 
         return $this->model->create($taskDTO->toArray());
@@ -69,6 +77,8 @@ class TaskService
     {
         $task = $this->find($taskDTO->id);
         $this->userService->find($taskDTO->user_id);
+
+        $taskDTO->id = Uuid::fromBytes($taskDTO->id)->toString();
 
         $task->update($taskDTO->toArray());
         return $task;
