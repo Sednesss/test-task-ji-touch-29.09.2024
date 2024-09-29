@@ -17,6 +17,7 @@ class Task extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'id',
         'title',
         'user_id',
         'description',
@@ -28,9 +29,14 @@ class Task extends Model
         $this->attributes['id'] = Uuid::fromString($value)->getBytes();
     }
 
-    public function getIdAttribute(): string
+    public function getIdTextAttribute(): string
     {
         return Uuid::fromBytes($this->id)->toString();
+    }
+
+    public function getIncrementing(): bool
+    {
+        return false;
     }
 
     public function getKeyType(): string

@@ -16,14 +16,6 @@ stop:
 down:
 	docker-compose down
 
-routes-list:
-	docker exec -it test_task_jitouch_app php artisan route:list
-
-cache-clear:
-	docker exec -it test_task_jitouch_app php artisan cache:clear
-	docker exec -it test_task_jitouch_app php artisan config:clear
-	docker exec -it test_task_jitouch_app php artisan route:clear
-
 tinker:
 	docker exec -it test_task_jitouch_app php artisan tinker
 
@@ -35,3 +27,14 @@ mysql:
 
 laravel:
 	docker exec -it test_task_jitouch_app bash
+
+routes-list:
+	docker exec -it test_task_jitouch_app php artisan route:list
+
+cache-clear:
+	docker exec -it test_task_jitouch_app php artisan cache:clear
+	docker exec -it test_task_jitouch_app php artisan config:clear
+	docker exec -it test_task_jitouch_app php artisan route:clear
+
+test:
+	docker exec -it test_task_jitouch_app php artisan test
