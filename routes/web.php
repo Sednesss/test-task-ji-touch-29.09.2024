@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\Task\StoreController as TaskStoreController;
 use App\Http\Controllers\Admin\Task\UpdateController as TaskUpdateController;
 use Illuminate\Support\Facades\Route;
 
-Route::as('admin_panel::')->prefix('admin-panel')->group(function () {
+Auth::routes();
+
+Route::as('admin_panel::')->prefix('admin-panel')->middleware('auth')->group(function () {
     Route::as('tasks::')->group(function () {
         Route::get('/', TaskIndexController::class)->name('index');
         Route::get('/create', TaskCreateController::class)->name('create');
@@ -18,7 +20,5 @@ Route::as('admin_panel::')->prefix('admin-panel')->group(function () {
         Route::delete('/{task}', TaskDestroyController::class)->name('destroy');
     });
 });
-
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
