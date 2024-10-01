@@ -32,14 +32,16 @@
                                 @foreach($tasks as $taskIndex => $task)
                                 <tr class="odd">
                                     <td class="col-1">{{ 1 + $taskIndex }}</td>
-                                    <td class="col-2">{{ $task->user->name }}</td>
+                                    <td class="col-2">
+                                        <i class="badge badge-secondary">{{ $task->user->name }}</i>
+                                    </td>
                                     <td class="col-2">{{ $task->title }}</td>
                                     <td class="col-4">{{ $task->description }}</td>
                                     <td class="col-1">
                                         @if($task->completed == '1')
-                                        Yes
+                                        <i class="badge badge-success">Yes</i>
                                         @elseif($task->completed == '0')
-                                        No
+                                        <i class="badge badge-danger">No</i>
                                         @endif
                                     </td>
                                     <td class="col-2 align-middle py-1 text-center skin_element-actions">
