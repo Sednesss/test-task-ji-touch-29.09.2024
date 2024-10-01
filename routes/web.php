@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Task\ConfirmDeleteController as TaskConfirmDeleteController;
 use App\Http\Controllers\Admin\Task\CreateController as TaskCreateController;
 use App\Http\Controllers\Admin\Task\DestroyController as TaskDestroyController;
 use App\Http\Controllers\Admin\Task\EditController as TaskEditController;
@@ -17,6 +18,7 @@ Route::as('admin_panel::')->prefix('admin-panel')->middleware('auth')->group(fun
         Route::post('/store', TaskStoreController::class)->name('store');
         Route::get('/{task}/edit', TaskEditController::class)->name('edit');
         Route::patch('/{task}', TaskUpdateController::class)->name('update');
+        Route::get('/{task}/confirm_delete', TaskConfirmDeleteController::class)->name('confirm_delete');
         Route::delete('/{task}', TaskDestroyController::class)->name('destroy');
     });
 });

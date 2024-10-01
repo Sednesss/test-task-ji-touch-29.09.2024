@@ -21,7 +21,7 @@ class StoreController extends Controller
             $taskDTO = TaskDTO::from([
                 'id' => Uuid::uuid4()->toString(),
                 'title' => $storeRequest->title,
-                'user_id' => Auth::user(),
+                'user_id' => Auth::user()->id,
                 'description' => $storeRequest->description,
                 'completed' => false
             ]);
