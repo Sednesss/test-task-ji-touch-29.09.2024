@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/', function () {
+    return redirect()->route('admin_panel::dashboard');
+});
+
 Route::as('admin_panel::')->prefix('admin-panel')->middleware('auth')->group(function () {
     Route::get('/', DashboardIndexController::class)->name('dashboard');
 

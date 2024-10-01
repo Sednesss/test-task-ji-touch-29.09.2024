@@ -21,9 +21,10 @@
                             <thead>
                                 <tr>
                                     <th class="col-1">№</th>
-                                    <th class="col-3">Author</th>
+                                    <th class="col-2">Author</th>
+                                    <th class="col-2">Title</th>
                                     <th class="col-4">Description</th>
-                                    <th class="col-2">Completed</th>
+                                    <th class="col-1">Completed</th>
                                     <th class="col-2"></th>
                                 </tr>
                             </thead>
@@ -31,9 +32,10 @@
                                 @foreach($tasks as $taskIndex => $task)
                                 <tr class="odd">
                                     <td class="col-1">{{ 1 + $taskIndex }}</td>
-                                    <td class="col-3">{{ $task->user->name }}</td>
+                                    <td class="col-2">{{ $task->user->name }}</td>
+                                    <td class="col-2">{{ $task->title }}</td>
                                     <td class="col-4">{{ $task->description }}</td>
-                                    <td class="col-2">
+                                    <td class="col-1">
                                         @if($task->completed == '1')
                                         Yes
                                         @elseif($task->completed == '0')

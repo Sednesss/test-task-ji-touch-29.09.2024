@@ -2,14 +2,29 @@
 
 namespace App\Http\Controllers\Admin\Task;
 
+use App\Exceptions\BaseException;
 use App\Http\Controllers\Controller;
-use App\Models\Task;
+use App\Services\Models\TaskService;
+use Exception;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Uuid;
 
 class EditController extends Controller
 {
-    public function __invoke(Task $task): View
+    public function __invoke(TaskService $taskService, string $taskId): View
     {
+        try {
+            $taskIdAsBinary = Uuid::fromString($taskId)->getBytes();
+            $task = $taskService->find($taskIdAsBinary);
+        } catch (BaseException $e) {
+            Log::error('Admin::Task:::EditController:' . $e->getMessage());
+            abort(500);
+        } catch (Exception $e) {
+            Log::error('Admin::Task:::EditController:' . $e->getMessage());
+            abort(500);
+        }
+
         return view('admin_panel.tasks.edit', [
             'task' => $task
         ]);

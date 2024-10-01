@@ -15,7 +15,8 @@ class ConfirmDeleteController extends Controller
     public function __invoke(TaskService $taskService, string $taskId): View
     {
         try {
-            $task = $taskService->find(Uuid::fromString($taskId)->getBytes());
+            $taskIdAsBinary = Uuid::fromString($taskId)->getBytes();
+            $task = $taskService->find($taskIdAsBinary);
         } catch (BaseException $e) {
             Log::error('Admin::Task:::ConfirmDeleteController:' . $e->getMessage());
             abort(500);
