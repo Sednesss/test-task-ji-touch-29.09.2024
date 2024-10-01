@@ -3,7 +3,7 @@
 @section('title', 'AdminPanel')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Общая статистика</h1>
+<h1 class="m-0 text-dark">General statistics</h1>
 @stop
 
 @section('content')
@@ -12,8 +12,8 @@
         <div class="info-box">
             <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-cube"></i></span>
             <div class="info-box-content">
-                <span class="info-box-text">Игровые предметы</span>
-                <span class="info-box-number">{{ $gameItemsCount }}</span>
+                <span class="info-box-text">Users</span>
+                <span class="info-box-number">{{ $usersCount }}</span>
             </div>
         </div>
     </div>
@@ -21,8 +21,8 @@
         <div class="info-box mb-3">
             <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-cubes"></i></span>
             <div class="info-box-content">
-                <span class="info-box-text">Добавлено скинов</span>
-                <span class="info-box-number">{{ $skinsCount }}</span>
+                <span class="info-box-text">Tasks</span>
+                <span class="info-box-number">{{ $tasksCount }}</span>
             </div>
         </div>
     </div>

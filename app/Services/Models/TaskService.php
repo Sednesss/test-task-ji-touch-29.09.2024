@@ -53,6 +53,11 @@ class TaskService
         return Task::all();
     }
 
+    public function count(): int
+    {
+        return Task::count();
+    }
+
     /**
      * @throws TaskAlreadyExistsException
      * @throws UserNotFoundException

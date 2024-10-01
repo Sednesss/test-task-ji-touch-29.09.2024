@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Dashboard\IndexController as DashboardIndexController;
 use App\Http\Controllers\Admin\Task\ConfirmDeleteController as TaskConfirmDeleteController;
 use App\Http\Controllers\Admin\Task\CreateController as TaskCreateController;
 use App\Http\Controllers\Admin\Task\DestroyController as TaskDestroyController;
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::as('admin_panel::')->prefix('admin-panel')->middleware('auth')->group(function () {
-    Route::as('tasks::')->group(function () {
+    Route::get('/', DashboardIndexController::class)->name('dashboard');
+
+    Route::as('tasks::')->prefix('tasks')->group(function () {
         Route::get('/', TaskIndexController::class)->name('index');
         Route::get('/create', TaskCreateController::class)->name('create');
         Route::post('/store', TaskStoreController::class)->name('store');
