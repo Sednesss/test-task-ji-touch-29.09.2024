@@ -25,9 +25,9 @@ class TaskService
     /**
      * @throws TaskNotFoundException
      */
-    public function find(string $id): Task
+    public function find(string $idAsBinary): Task
     {
-        $task = $this->model->find($id);
+        $task = $this->model->find($idAsBinary);
 
         if (!$task) {
             throw new TaskNotFoundException();
@@ -51,6 +51,11 @@ class TaskService
         }
 
         return Task::all();
+    }
+
+    public function count(): int
+    {
+        return Task::count();
     }
 
     /**
@@ -87,9 +92,9 @@ class TaskService
     /**
      * @throws TaskNotFoundException
      */
-    public function delete(string $id)
+    public function delete(string $idAsBinary)
     {
-        $task = $this->find($id);
+        $task = $this->find($idAsBinary);
         $task->delete($task->id);
     }
 }

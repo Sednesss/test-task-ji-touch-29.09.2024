@@ -27,4 +27,9 @@ class UserService
 
         return $user;
     }
+
+    public function count(): int
+    {
+        return USer::count();
+    }
 }
